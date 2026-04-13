@@ -6,15 +6,18 @@ build_team: rust_build_team
 
 current_milestone: v0.1.0
 phase: plan
-current_task: planning — rust-architect, rust-critic, sdd
-completed_tasks: []
+current_task: awaiting human plan approval
+completed_tasks:
+  - planning/rust-architect
+  - planning/rust-critic
+  - planning/sdd
 
 open_questions: []
 
 milestones:
   v0.1.0:
     hypothesis: do API teams on non-Node CI pipelines adopt a single-binary Spectral-compatible linter?
-    scope: TBD — pending approved plan
+    scope: see .ilmu/plan.md
     status: in-progress
   v0.2.0:
     hypothesis: TBD — derived from v0.1.0 signal
@@ -22,4 +25,4 @@ milestones:
     status: planned
 
 last_updated: 2026-04-09
-last_agent: scaffold
+last_agent: rust-teamlead
