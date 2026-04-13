@@ -3,61 +3,33 @@
 
 # ── Advisories ────────────────────────────────────────────────────────────
 # Checks crates against the RustSec advisory database.
+# cargo-deny 0.14+ removed lint-level keys (vulnerability/unmaintained/yanked)
+# and db-path/db-urls. Vulnerabilities are always denied by default.
 [advisories]
-# Local path where cargo-deny caches the advisory database.
-db-path = "~/.cargo/advisory-db"
-
-# Remote sources for the advisory database.
-db-urls = ["https://github.com/rustsec/advisory-db"]
-
-# Deny crates with vulnerabilities of medium severity or higher.
-# Severity levels: none < low < medium < high < critical
-vulnerability = "deny"
-
-# Warn on unmaintained crates rather than blocking the build — many useful
-# crates are stable and "done", so an unmaintained notice isn't always
-# actionable. Revisit per project if tighter controls are needed.
-unmaintained = "warn"
-
-# Warn about crates that have been yanked from crates.io.
-yanked = "warn"
-
 # Ignore specific advisories by ID if a false-positive or no fix exists:
-# ignore = ["RUSTSEC-0000-0000"]
+ignore = []
 
 # ── Licenses ──────────────────────────────────────────────────────────────
 # Validates that every dependency uses an acceptable license.
+# cargo-deny 0.14+ removed unlicensed/copyleft/deny fields; anything not in
+# the allow list is implicitly denied (GPL/AGPL excluded by omission).
 [licenses]
-# Treat any crate with no detectable license as an error.
-unlicensed = "deny"
-
-# Warn on copyleft licenses that are not explicitly allowed or denied below.
-# This catches LGPL and similar — worth a human review rather than a hard fail.
-copyleft = "warn"
-
-# Licenses that are unconditionally permitted for dependencies.
+unused-allowed-license = "allow"
 allow = [
     "MIT",
     "Apache-2.0",
-    "MIT OR Apache-2.0",   # SPDX expression used by many Rust crates
+    "Apache-2.0 WITH LLVM-exception",
     "MPL-2.0",
     "BSD-2-Clause",
     "BSD-3-Clause",
     "ISC",
-    "Unicode-3.0",         # Used by unicode-ident and related crates
+    "Unicode-3.0",
     "Zlib",
 ]
 
-# Licenses that are unconditionally prohibited.
-deny = [
-    "GPL-3.0",             # Strong copyleft — incompatible with proprietary code
-    "AGPL-3.0",            # Network-copyleft — even stricter than GPL
-]
-
-# Some crates use non-SPDX strings or dual licenses that need explicit
-# exceptions. Add them here as needed:
+# Per-crate exceptions for non-standard licenses:
 # [[licenses.exceptions]]
-# name = "some-crate"
+# crate = "some-crate"
 # allow = ["LicenseRef-SomeLicense"]
 
 # ── Bans ──────────────────────────────────────────────────────────────────
