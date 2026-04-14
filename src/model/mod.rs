@@ -4,7 +4,7 @@ pub use violation::{Severity, Violation};
 
 use crate::error::LintError;
 
-/// The OpenAPI specification version detected in a document.
+/// The `OpenAPI` specification version detected in a document.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum OasVersion {
     V2,
@@ -13,7 +13,7 @@ pub enum OasVersion {
 }
 
 impl OasVersion {
-    /// Detect the OpenAPI version from a parsed document.
+    /// Detect the `OpenAPI` version from a parsed document.
     ///
     /// # Errors
     ///

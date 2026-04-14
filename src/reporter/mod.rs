@@ -13,6 +13,10 @@ const ANSI_RESET: &str = "\x1b[0m";
 /// `{spec_path}:{path}  {severity}  {rule_id}  {message}`
 ///
 /// ANSI colour codes are applied when `use_color` is `true`.
+///
+/// # Errors
+///
+/// Returns [`std::io::Error`] if writing to `out` fails.
 pub fn write_text(
     violations: &[Violation],
     spec_path: &str,
@@ -48,6 +52,10 @@ pub fn write_text(
 }
 
 /// Write violations as a JSON object containing a `violations` array and a `summary`.
+///
+/// # Errors
+///
+/// Returns [`std::io::Error`] if writing to `out` fails.
 pub fn write_json(
     violations: &[Violation],
     spec_path: &str,

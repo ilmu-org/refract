@@ -47,30 +47,29 @@ pub fn load(path: &Path) -> Result<RulesetConfig, LintError> {
             continue;
         };
 
-        match key_str {
-            "extends" => validate_extends(value)?,
-            _ => {
-                // Reject custom rule definitions (objects with "given" or "then").
-                if let Some(obj) = value.as_mapping() {
-                    if obj.contains_key("given") || obj.contains_key("then") {
-                        return Err(LintError::Ruleset(
-                            "Custom rule definitions are not supported in v0.1.0. \
-                             Only severity overrides for built-in rules are supported."
-                                .into(),
-                        ));
-                    }
-                    // Unknown object key — ignore silently.
-                    continue;
+        if key_str == "extends" {
+            validate_extends(value)?;
+        } else {
+            // Reject custom rule definitions (objects with "given" or "then").
+            if let Some(obj) = value.as_mapping() {
+                if obj.contains_key("given") || obj.contains_key("then") {
+                    return Err(LintError::Ruleset(
+                        "Custom rule definitions are not supported in v0.1.0. \
+                         Only severity overrides for built-in rules are supported."
+                            .into(),
+                    ));
                 }
-
-                // Try to parse as a severity string override.
-                if let Some(severity) = parse_severity_value(value) {
-                    config
-                        .severity_overrides
-                        .insert(key_str.to_string(), severity);
-                }
-                // Unknown string/number keys — ignore silently.
+                // Unknown object key — ignore silently.
+                continue;
             }
+
+            // Try to parse as a severity string override.
+            if let Some(severity) = parse_severity_value(value) {
+                config
+                    .severity_overrides
+                    .insert(key_str.to_string(), severity);
+            }
+            // Unknown string/number keys — ignore silently.
         }
     }
 
@@ -96,6 +95,8 @@ fn validate_extends(value: &serde_yaml::Value) -> Result<(), LintError> {
 }
 
 /// Parse a YAML value as a severity override. Returns `None` if not a recognized string.
+// Option<Option<T>> is intentional: outer None = unrecognised key, inner None = "off" (disabled).
+#[allow(clippy::option_option)]
 fn parse_severity_value(value: &serde_yaml::Value) -> Option<Option<Severity>> {
     match value.as_str()? {
         "off" => Some(None),

@@ -1,6 +1,10 @@
 // openapi-linter library root.
 // Business logic lives here; src/main.rs is the thin CLI entry point.
 
+#![deny(unsafe_code)]
+#![warn(clippy::pedantic)]
+#![allow(clippy::module_name_repetitions)]
+
 pub mod error;
 pub mod model;
 pub mod parser;
@@ -13,7 +17,7 @@ use std::path::Path;
 use error::LintError;
 use model::Violation;
 
-/// Lint an OpenAPI spec file and return all violations.
+/// Lint an `OpenAPI` spec file and return all violations.
 ///
 /// Applies severity overrides and disabled rules from the optional ruleset file.
 /// Violations are sorted by path for stable, deterministic output.

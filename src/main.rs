@@ -1,3 +1,5 @@
+#![deny(unsafe_code)]
+
 use std::io::IsTerminal as _;
 
 use clap::Parser;
@@ -14,7 +16,7 @@ enum OutputFormat {
     about = "Fast OpenAPI linter — Spectral OAS compatible"
 )]
 struct Cli {
-    /// Path to the OpenAPI spec file (YAML or JSON).
+    /// Path to the `OpenAPI` spec file (YAML or JSON).
     spec: std::path::PathBuf,
 
     /// Path to a .spectral.yaml ruleset file.
@@ -40,7 +42,7 @@ fn main() {
     match openapi_linter::lint(&cli.spec, cli.ruleset.as_deref()) {
         Ok(violations) => {
             if cli.quiet {
-                std::process::exit(if violations.is_empty() { 0 } else { 1 });
+                std::process::exit(i32::from(!violations.is_empty()));
             }
 
             let stdout = std::io::stdout();
@@ -65,7 +67,7 @@ fn main() {
                 std::process::exit(2);
             }
 
-            std::process::exit(if violations.is_empty() { 0 } else { 1 });
+            std::process::exit(i32::from(!violations.is_empty()));
         }
         Err(e) => {
             eprintln!("{e:#}");

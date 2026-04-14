@@ -165,3 +165,8 @@ out_of_scope:
     Milestone: v0.3.0."
   - "Async runtime. Reason: workload is single-file synchronous; no benefit. Milestone: v0.2.0
     if multi-file linting is added."
+  - "mod.rs → named module style (src/rules.rs + src/rules/ subfolder, etc.). Reason: pure
+    rename refactor; wrong time relative to open PR. Do as first commit on v0.2.0 branch.
+    Milestone: v0.2.0."
+  - "#![warn(missing_docs)] + doc comments on Rule trait methods (id, message, default_severity,
+    check). Reason: touches every rule file; scope creep for v0.1.0 PR. Milestone: v0.2.0."

@@ -2,7 +2,7 @@ use std::path::Path;
 
 use crate::error::LintError;
 
-/// Parse an OpenAPI spec file into a JSON value.
+/// Parse an `OpenAPI` spec file into a JSON value.
 ///
 /// Accepts `.yaml`, `.yml`, and `.json` files. For unknown extensions YAML is
 /// attempted first, then JSON.
@@ -16,7 +16,7 @@ pub fn parse(path: &Path) -> Result<serde_json::Value, LintError> {
     let content = std::fs::read_to_string(path).map_err(LintError::Io)?;
 
     match path.extension().and_then(|e| e.to_str()) {
-        Some("yaml") | Some("yml") => parse_yaml(&content),
+        Some("yaml" | "yml") => parse_yaml(&content),
         Some("json") => parse_json(&content),
         _ => parse_yaml(&content).or_else(|_| parse_json(&content)),
     }
