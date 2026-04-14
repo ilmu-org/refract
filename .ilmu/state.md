@@ -6,7 +6,7 @@ build_team: rust_build_team
 
 current_milestone: v1.0.0
 phase: planning
-current_task: v1.0.0 planning
+current_task: rename complete — ready to scope v0.3.0
 completed_tasks:
   - planning/rust-architect
   - planning/rust-critic
@@ -37,4 +37,4 @@ milestones:
     status: future
 
 last_updated: 2026-04-14
-last_agent: rename pipeline (refract rename PR)
+last_agent: rename pipeline (post-merge cleanup)
