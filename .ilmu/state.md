@@ -6,7 +6,7 @@ build_team: rust_build_team
 
 current_milestone: v0.1.0
 phase: complete
-current_task: v0.1.0 shipped — awaiting release signal for v0.2.0 planning
+current_task: v0.1.0 released — begin v0.2.0 planning
 completed_tasks:
   - planning/rust-architect
   - planning/rust-critic
@@ -21,9 +21,13 @@ milestones:
     scope: see .ilmu/plan.md
     status: complete
   v0.2.0:
-    hypothesis: TBD — derived from v0.1.0 signal
+    hypothesis: TBD — start planning immediately after v0.1.0 release
     scope: TBD
     status: planned
+  v1.0.0:
+    hypothesis: public launch — promote when feature-complete and stable
+    scope: TBD
+    status: future
 
 last_updated: 2026-04-14
-last_agent: rust-teamlead (v0.1.0 merged)
+last_agent: rust-teamlead (v0.1.0 released)
