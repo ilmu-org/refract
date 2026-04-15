@@ -15,7 +15,7 @@ ilmu-org/ideas#2
 ## State
 
 Always read `.ilmu/state.md` before starting any task.
-Always read `.ilmu/decisions.md` before making any architectural choice.
+Always read `.ilmu/decisions.md` (the ADR index) before making any architectural choice, then fetch the specific ADR files in `.ilmu/decisions/` relevant to your work area. Completed milestone plans are archived in `.ilmu/archive/`.
 Always read `.ilmu/plan.md` before starting any build task.
 
 ## Key constraints (from research)
