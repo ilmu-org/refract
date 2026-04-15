@@ -22,21 +22,21 @@ open_questions: []
 
 milestones:
   v0.1.0:
-    hypothesis: do API teams on non-Node CI pipelines adopt a single-binary Spectral-compatible linter?
+    hypothesis: API teams on non-Node CI adopt single-binary Spectral-compatible linter?
     scope: see .ilmu/plan.md
     status: complete
   v0.2.0:
     hypothesis: >
-      CI pipeline users on non-Node stacks see enough Spectral rule parity and actionable
-      violation output (with source locations) that they replace Spectral without modifying
+      CI users on non-Node stacks see enough Spectral rule parity + actionable
+      violations (with source locations) to replace Spectral without touching
       existing .spectral.yaml files.
     scope: see .ilmu/plan.md ## v0.2.0
     status: complete
   v0.3.0:
     hypothesis: >
-      Adding 17 structural and correctness rules closes the Spectral OAS compatibility
-      gap enough that teams adopting refract get equivalent lint coverage on path hygiene,
-      tag validation, parameter dedup, and enum integrity without needing Spectral.
+      17 structural/correctness rules close Spectral OAS gap enough that teams
+      get equivalent lint coverage on path hygiene, tag validation, param dedup,
+      enum integrity -- no Spectral needed.
     scope: see .ilmu/plan.md ## v0.3.0
     status: planning
   v1.0.0:
