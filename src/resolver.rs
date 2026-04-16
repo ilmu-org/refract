@@ -56,7 +56,7 @@ pub enum ResolveError {
         /// The HTTP ref string.
         ref_str: String,
     },
-    /// The total number of external resolution steps exceeded [`MAX_DEPTH`].
+    /// The total number of external resolution steps exceeded the depth limit (64).
     DepthExceeded,
 }
 
