@@ -58,6 +58,17 @@ Merge PRs into `build/vX.X.X` in phase order. Document the upstream branch depen
 
 Final PR: `build/vX.X.X -> main`. Open after all phase PRs merged and integration check passes. Leave for human review, do not merge.
 
+## Git hooks
+
+Templates in `hooks/`. Install:
+```
+cp hooks/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
+cp hooks/pre-push .git/hooks/pre-push && chmod +x .git/hooks/pre-push
+```
+
+Both hooks run the full CI check suite: fmt, clippy, tests, audit, deny, doc.
+When CI gains a new check, add it to both hooks and both `hooks/` templates.
+
 ## Writing .ilmu files and prompts
 
 Any agent writing or updating files in `.ilmu/` (state, plan, decisions, ADRs) or creating a prompt file must run the output through the caveman compress skill before writing it to disk:

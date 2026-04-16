@@ -1,9 +1,11 @@
 #!/bin/sh
-# pre-push — slower checks that run before any push
+# pre-push — mirrors CI checks exactly
 #
 # INSTALL:
 #   cp hooks/pre-push .git/hooks/pre-push
 #   chmod +x .git/hooks/pre-push
+#
+# Requires: cargo-audit, cargo-deny
 
 set -e
 
@@ -20,15 +22,35 @@ step() {
     printf "pre-push: running %s ...\n" "$1"
 }
 
-# ── 1. Doc build (mirrors CI RUSTDOCFLAGS=-D warnings) ────────────────────
+# ── 1. Formatting ──────────────────────────────────────────────────────────
 
-step "cargo doc --no-deps"
-RUSTDOCFLAGS="-D warnings" cargo doc --no-deps \
-    || fail "cargo doc (fix rustdoc warnings above)"
+step "cargo fmt --check"
+cargo fmt --check || fail "cargo fmt --check (run 'cargo fmt' to fix)"
 
-# ── 2. Integration tests ───────────────────────────────────────────────────
+# ── 2. Linting ────────────────────────────────────────────────────────────
+
+step "cargo clippy --all-targets --all-features"
+cargo clippy --all-targets --all-features -- -D warnings -W clippy::pedantic \
+    || fail "cargo clippy (fix the warnings above)"
+
+# ── 3. Tests ──────────────────────────────────────────────────────────────
 
 step "cargo test --all-features"
-cargo test --all-features || fail "cargo test --all-features (integration tests failed)"
+cargo test --all-features || fail "cargo test --all-features"
+
+# ── 4. Security audit ─────────────────────────────────────────────────────
+
+step "cargo audit"
+cargo audit || fail "cargo audit (vulnerability found)"
+
+# ── 5. License and dependency policy ──────────────────────────────────────
+
+step "cargo deny check"
+cargo deny check || fail "cargo deny check (policy violation)"
+
+# ── 6. Documentation build ────────────────────────────────────────────────
+
+step "cargo doc --no-deps"
+RUSTDOCFLAGS="-D warnings" cargo doc --no-deps || fail "cargo doc (fix rustdoc warnings above)"
 
 printf "pre-push: all checks passed.\n"

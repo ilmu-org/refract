@@ -1,16 +1,13 @@
 #!/bin/sh
-# pre-commit — fast quality gate for ilmu Rust projects
+# pre-commit — mirrors CI checks exactly
 #
 # INSTALL:
-#   cp pre-commit.sh .git/hooks/pre-commit
+#   cp hooks/pre-commit .git/hooks/pre-commit
 #   chmod +x .git/hooks/pre-commit
 #
-# Runs in <30 seconds by limiting tests to library unit tests only.
-# Integration tests and doc tests are left for CI.
+# Requires: cargo-audit, cargo-deny
 
 set -e
-
-# ── Helpers ────────────────────────────────────────────────────────────────
 
 BOLD='\033[1m'
 RED='\033[0;31m'
@@ -36,9 +33,24 @@ step "cargo clippy --all-targets --all-features"
 cargo clippy --all-targets --all-features -- -D warnings -W clippy::pedantic \
     || fail "cargo clippy (fix the warnings above)"
 
-# ── 3. Unit tests only (fast) ─────────────────────────────────────────────
+# ── 3. Tests ──────────────────────────────────────────────────────────────
 
-step "cargo test --lib"
-cargo test --lib || fail "cargo test --lib (unit tests failed)"
+step "cargo test --all-features"
+cargo test --all-features || fail "cargo test --all-features"
+
+# ── 4. Security audit ─────────────────────────────────────────────────────
+
+step "cargo audit"
+cargo audit || fail "cargo audit (vulnerability found)"
+
+# ── 5. License and dependency policy ──────────────────────────────────────
+
+step "cargo deny check"
+cargo deny check || fail "cargo deny check (policy violation)"
+
+# ── 6. Documentation build ────────────────────────────────────────────────
+
+step "cargo doc --no-deps"
+RUSTDOCFLAGS="-D warnings" cargo doc --no-deps || fail "cargo doc (fix rustdoc warnings above)"
 
 printf "pre-commit: all checks passed.\n"
