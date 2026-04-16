@@ -45,7 +45,14 @@ Phase branches: `phase{N}/vX.X.X`.
 - Phase 1 branches from `build/vX.X.X`
 - Phase N (N > 1) branches from `phase{N-1}/vX.X.X`
 
-Each phase opens PR targeting `build/vX.X.X`. Do not wait for human PR approval between phases. Branch next phase from current phase branch immediately after opening its PR.
+Each phase opens PR targeting `build/vX.X.X`. Do not wait for human PR approval between phases.
+
+After opening each phase PR, wait for CI before proceeding:
+```
+gh pr checks <PR-number> --watch --fail-fast
+```
+On failure: fix, push, re-run checks. Do not branch or merge until green.
+On success: squash-merge into `build/vX.X.X`, then branch the next phase.
 
 Merge PRs into `build/vX.X.X` in phase order. Document the upstream branch dependency in each PR description.
 
