@@ -24,6 +24,23 @@ Read `.ilmu/plan.md` before any build task.
 - Target: non-Rust CI pipelines (Go, Python, Java) — binary UX matters
 - Single static binary: no runtime deps, no install friction
 - v0.1.0 scope cut by rust-critic — do not expand
+## Git: what is and is not tracked
+
+Gitignored (do not attempt to commit):
+- `prompts/` — build and scoping prompts, local only
+- `dev/` — session archives
+- `handoff.md` — agent handoff state
+- `target/` — build artifacts
+- `.local/` — local overrides
+
+Tracked (commit normally):
+- `src/` — all Rust source
+- `tests/` — fixtures and integration tests
+- `assets/` — bundled schemas
+- `.ilmu/` — state, plan, decisions, ADR files, archives
+- `.github/` — workflows and hooks
+- `Cargo.toml`, `Cargo.lock`, `CHANGELOG.md`, `README.md`, `CLAUDE.md`
+
 ## Commit messages
 
 Plain conventional commits only: `type: what changed`.
