@@ -5,8 +5,8 @@ target_ecosystem: cross-platform (macOS, Linux, Windows)
 build_team: rust_build_team
 
 current_milestone: v0.4.0
-phase: release-ready
-current_task: v0.4.0 build complete -- PR #13 open for human review
+phase: released
+current_task: v0.4.0 released
 completed_tasks:
   - planning/rust-architect
   - planning/rust-critic
@@ -21,6 +21,7 @@ completed_tasks:
   - v0.3.0-release
   - v0.4.0-scoping
   - v0.4.0-build
+  - v0.4.0-release
 
 open_questions: []
 
@@ -46,12 +47,12 @@ milestones:
     hypothesis: >
       Cross-file $ref resolution + JSON Schema validation (boon) + 4 new rules
       bring refract to full structural correctness parity with Spectral OAS ruleset.
-    scope: see .ilmu/plan.md
-    status: build-complete (PR #13 open, awaiting human merge)
+    scope: see .ilmu/archive/plan-v0.4.0.md
+    status: complete
   v1.0.0:
     hypothesis: public launch -- promote when feature-complete + stable
     scope: TBD
     status: future
 
 last_updated: 2026-04-16
-last_agent: claude-sonnet-4-6 (v0.4.0 build)
+last_agent: claude-sonnet-4-6 (v0.4.0 release)
