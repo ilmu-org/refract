@@ -60,13 +60,13 @@ Final PR: `build/vX.X.X -> main`. Open after all phase PRs merged and integratio
 
 ## Git hooks
 
-Hooks live in `hooks/`. After cloning, activate with:
+Hooks live in `.github/hooks/`. After cloning, activate with:
 ```
-git config core.hooksPath hooks
+git config core.hooksPath .github/hooks
 ```
 
 Both hooks run the full CI check suite: fmt, clippy, tests, audit, deny, doc.
-When CI gains a new check, add it to both `hooks/pre-commit` and `hooks/pre-push`.
+When CI gains a new check, add it to both `.github/hooks/pre-commit` and `.github/hooks/pre-push`.
 
 ## Writing .ilmu files and prompts
 
