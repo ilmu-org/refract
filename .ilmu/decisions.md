@@ -1,6 +1,6 @@
 # Architecture Decision Records
 
-rust-architect writes. All build team agents read index before any task. Fetch ADR files from `.ilmu/decisions/` for relevant details. Contradict decision = file escalation issue on _ops first.
+rust-architect writes. All build team agents read index before task. Fetch ADR files from `.ilmu/decisions/` for details. Contradict decision = file escalation on _ops first.
 
 ## Index
 
@@ -22,7 +22,7 @@ rust-architect writes. All build team agents read index before any task. Fetch A
 | [ADR-014](decisions/ADR-014.md) | Directory Scanning with walkdir; lint_dir ... | Accepted | **API shape**: |
 | [ADR-015](decisions/ADR-015.md) | Document-Internal `$ref` Resolution Utilit... | Accepted | Shared utility in `src/rules/util.rs`: |
 | [ADR-016](decisions/ADR-016.md) | mod.rs → Named Module Rename Confirms Rust... | Accepted | Rename pattern (applied to `parser`, `model`, `rules`, `ruleset`, `reporter`): |
-| [ADR-017](decisions/ADR-017.md) | Project Rename — openapi-linter → refract | Accepted | Rename project from `openapi-linter` to `refract` at pre-v0.3.0 stage... |
+| [ADR-017](decisions/ADR-017.md) | Project Rename — openapi-linter → refract | Accepted | Rename `openapi-linter` to `refract` at pre-v0.3.0 stage... |
 | [ADR-018](decisions/ADR-018.md) | v0.3.0 Rule Set, 17 Structural and Correct... | Accepted | v0.3.0 ships exactly 17 class-1 structural/correctness rules; no schema-eval... |
 | [ADR-019](decisions/ADR-019.md) | JSON Schema Validation Rules Deferred to v... | Accepted | Defer all four schema-eval rules to v0.4.0. Defer boon (or alt... |
 | [ADR-020](decisions/ADR-020.md) | Cross-File $ref Resolution Deferred to v0.4.0 | Accepted | Defer cross-file `$ref` resolution to v0.4.0. Internal-only `deref` util... |
@@ -32,5 +32,6 @@ rust-architect writes. All build team agents read index before any task. Fetch A
 | [ADR-024](decisions/ADR-024.md) | Workspace Structure Assessment -- v0.4.0 Deferral | Accepted | No extraction in v0.4.0. Triggers: library consumer issue, secondary binary, or >15K LOC. ADR-001 single-crate continues. |
 | [ADR-025](decisions/ADR-025.md) | GitHub Actions Node.js 24 Migration | Accepted | Standalone chore PR. `checkout@v4`->`v6`, `upload-artifact@v4`->`v7`, `download-artifact@v4`->`v8`, `softprops/action-gh-release@v2`->`v3`. All on node24. Ship before June 2026 cutoff. |
 | [ADR-026](decisions/ADR-026.md) | v0.5.0 Rule Set, 6 Spectral OAS Parity Rules | Accepted | 6 rules: `oas2-parameter-description`, `oas2-api-schemes`, `oas2-anyOf`, `oas2-oneOf`, `oas3-valid-media-example`, `oas2-valid-media-example`. No new deps. 42 total rules after ship. Phase 1 = 4 OAS 2.x structural, Phase 2 = 2 media-example boon. |
-| [ADR-027](decisions/ADR-027.md) | oas3-unused-component Deferred to v0.6.0 | Accepted | Graph-traversal rule needs refgraph module covering `$ref` + `discriminator.mapping` + security + `operationRef` + callbacks. Spectral's own version has FP history. Defer to avoid inheriting risk without deliberate graph infra. |
+| [ADR-027](decisions/ADR-027.md) | oas3-unused-component Deferred to v0.6.0 | Accepted | Graph-traversal rule needs refgraph module covering `$ref` + `discriminator.mapping` + security + `operationRef` + callbacks. Spectral's own version has FP history. Defer to avoid inheriting risk without graph infra. |
 | [ADR-028](decisions/ADR-028.md) | Deref'd<'a> Newtype Deferred Again Despite >8 Trigger | Accepted | Override ADR-021's >8 trigger. Count reaches 10 after v0.5.0. Zero FP bugs from missed deref. Review discipline continues. New triggers: release-blocking FP, count reaches 15, or `LintContext` needs context-level deref. |
+| [ADR-029](decisions/ADR-029.md) | v1.0.0 Scope — Drop-in Spectral OAS Replacement (Declarative Configs) | Accepted | v1.0.0 = drop-in for declarative `.spectral.yaml` configs. Parity corpus required. Permanent exclusions: JS function rules, asyncapi, remote extends URLs. Checklist in `.ilmu/v1-readiness.md`. |
