@@ -68,6 +68,31 @@ git config core.hooksPath .github/hooks
 Both hooks run the full CI check suite: fmt, clippy, tests, audit, deny, doc.
 When CI gains a new check, add it to both `.github/hooks/pre-commit` and `.github/hooks/pre-push`.
 
+## Release description style
+
+Every GitHub release must follow this structure (see v0.1.0 and v0.2.0 as canonical examples):
+
+```
+## What's in this release
+
+One sentence summary. Then:
+
+**New rules (N):**
+- `rule-id` — description
+
+**Other notable changes** (if any): short bullets.
+
+## Install
+
+Platform table + tar/zip extract commands using the current binary name.
+
+## Quick start
+
+Annotated usage examples covering: basic lint, directory lint, output formats, quiet mode.
+```
+
+The release workflow generates an empty description. The release agent must edit it with `gh release edit vX.X.X --notes "..."` before reporting done.
+
 ## Writing .ilmu files and prompts
 
 Any agent writing or updating files in `.ilmu/` (state, plan, decisions, ADRs) or creating a prompt file must run the output through the caveman compress skill before writing it to disk:
