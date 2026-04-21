@@ -2,6 +2,31 @@
 
 All notable changes to refract are documented here.
 
+## [0.5.0] - 2026-04-21
+
+### Added
+
+6 new rules closing remaining Spectral OAS parity gap (except graph-analysis rules):
+
+| Rule ID | Description | Severity |
+|---|---|---|
+| `oas2-parameter-description` | Every OAS 2.x parameter must have a non-empty description | warn |
+| `oas2-api-schemes` | Top-level `schemes` must be present, non-empty, and contain only `http`, `https`, `ws`, or `wss` | warn |
+| `oas2-anyOf` | `anyOf` keyword is not valid in OAS 2.x schemas | error |
+| `oas2-oneOf` | `oneOf` keyword is not valid in OAS 2.x schemas | error |
+| `oas3-valid-media-example` | Validate `example`/`examples` on MediaType, Parameter, and Header objects (OAS 3.x) | error |
+| `oas2-valid-media-example` | Validate OAS 2.x response `examples` map values against the response schema | error |
+
+### Changed
+
+- Shared boon validation helpers (`validate_example`, `strip_example_keys`, `collect_leaves`) moved to `src/rules/util.rs`; consumed by all four example-validation rules.
+- `oas3-unused-component` in `.spectral.yaml` now emits an info-level notice instead of a generic unknown-rule warning (ADR-027 stub).
+
+### Notes
+
+- `oas3-unused-component` is not yet implemented. It requires a full document reference graph (transitive `$ref`, `discriminator.mapping`, `security` name references). Deferred to v0.6.0 to avoid the false-positive rate Spectral itself has accumulated. See ADR-027.
+- `Deref'd<'a>` newtype deferred again despite deref-dependent rule count reaching 10. No bugs traced to missing deref across v0.3.0-v0.5.0. New trigger: first release-blocking FP bug or count reaching 15. See ADR-028.
+
 ## [0.4.0] - 2026-04-16
 
 ### Added
