@@ -5,8 +5,8 @@ target_ecosystem: cross-platform (macOS, Linux, Windows)
 build_team: rust_build_team
 
 current_milestone: v0.5.0
-phase: planning
-current_task: v0.5.0 scoping done, awaiting build
+phase: build
+current_task: v0.5.0 PR open, awaiting review
 completed_tasks:
   - planning/rust-architect
   - planning/rust-critic
@@ -23,6 +23,7 @@ completed_tasks:
   - v0.4.0-build
   - v0.4.0-release
   - v0.5.0-scoping
+  - v0.5.0-build
 
 open_questions: []
 
@@ -39,9 +40,8 @@ milestones:
     status: complete
   v0.3.0:
     hypothesis: >
-      17 structural/correctness rules close Spectral OAS gap. Equivalent
-      coverage: path hygiene, tag validation, param dedup, enum integrity.
-      No Spectral needed.
+      17 structural/correctness rules close Spectral OAS gap. Coverage:
+      path hygiene, tag validation, param dedup, enum integrity. No Spectral needed.
     scope: see .ilmu/archive/plan-v0.3.0.md
     status: complete
   v0.4.0:
@@ -56,15 +56,18 @@ milestones:
       example validation) close remaining gap except graph-analysis rules.
       Near-complete Spectral coverage; only oas3-unused-component remains,
       deferred to v0.6.0.
-    scope: see .ilmu/plan.md ## v0.5.0
-    status: scoping complete, build pending
+    scope: see .ilmu/plan.md
+    status: PR open (build/v0.5.0 -> main, PR #19), awaiting review
+    pr: https://github.com/ilmu-org/refract/pull/19
+    rule_count: 42
+    binary_size: 2.1 MB
   v1.0.0:
     hypothesis: >
-      drop-in Spectral OAS replacement: .spectral.yaml works unchanged
+      Drop-in Spectral OAS replacement: .spectral.yaml works unchanged
       (custom declarative rules + built-in functions), behaviour matches
       parity corpus, README reflects compatibility boundary.
     scope: see .ilmu/v1-readiness.md
     status: future
 
-last_updated: 2026-04-16
-last_agent: claude-sonnet-4-6 (v0.5.0 scoping)
+last_updated: 2026-04-21
+last_agent: claude-sonnet-4-6 (v0.5.0 build)
