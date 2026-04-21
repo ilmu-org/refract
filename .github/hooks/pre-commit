@@ -1,6 +1,6 @@
 #!/bin/sh
 # pre-commit — mirrors CI checks exactly
-# Requires: cargo-audit, cargo-deny
+# Requires: cargo-audit, cargo-deny, cargo-nextest
 
 set -e
 
@@ -30,8 +30,8 @@ cargo clippy --all-targets --all-features -- -D warnings -W clippy::pedantic \
 
 # ── 3. Tests ──────────────────────────────────────────────────────────────
 
-step "cargo test --all-features"
-cargo test --all-features || fail "cargo test --all-features"
+step "cargo nextest run --all-features"
+cargo nextest run --all-features || fail "cargo nextest run --all-features"
 
 # ── 4. Security audit ─────────────────────────────────────────────────────
 
