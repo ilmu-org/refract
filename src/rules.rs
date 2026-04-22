@@ -8,13 +8,19 @@ mod license_url;
 mod no_eval_in_markdown;
 mod no_ref_siblings;
 mod no_script_tags_in_markdown;
+mod oas2_any_of;
+mod oas2_api_schemes;
+mod oas2_one_of;
+mod oas2_parameter_description;
 mod oas2_schema;
+mod oas2_valid_media_example;
 mod oas2_valid_schema_example;
 mod oas3_api_servers;
 mod oas3_parameter_description;
 mod oas3_schema;
 mod oas3_server_not_example_com;
 mod oas3_server_trailing_slash;
+mod oas3_valid_media_example;
 mod oas3_valid_schema_example;
 mod open_api_tags;
 mod openapi_tags_alphabetical;
@@ -100,11 +106,18 @@ pub fn default_registry() -> Vec<Box<dyn Rule>> {
         // v0.3.0 Phase 4: type-aware rules
         Box::new(duplicated_entry_in_enum::DuplicatedEntryInEnum),
         Box::new(typed_enum::TypedEnum),
+        // v0.5.0: OAS 2.x structural rules
+        Box::new(oas2_api_schemes::Oas2ApiSchemes),
+        Box::new(oas2_any_of::Oas2AnyOf),
+        Box::new(oas2_one_of::Oas2OneOf),
+        Box::new(oas2_parameter_description::Oas2ParameterDescription),
         // v0.4.0: JSON Schema structural validation rules
         Box::new(oas3_schema::Oas3Schema),
         Box::new(oas2_schema::Oas2Schema),
         // v0.4.0: Example validation rules
+        Box::new(oas3_valid_media_example::Oas3ValidMediaExample),
         Box::new(oas3_valid_schema_example::Oas3ValidSchemaExample),
+        Box::new(oas2_valid_media_example::Oas2ValidMediaExample),
         Box::new(oas2_valid_schema_example::Oas2ValidSchemaExample),
     ]
 }

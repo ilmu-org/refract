@@ -38,7 +38,7 @@ migration work — download the binary, run it.
 
 - Validates OpenAPI 2.x, 3.0, and 3.1 specs (YAML and JSON)
 - Reads existing `.spectral.yaml` / `.spectral.yml` — no config migration
-- 32 built-in rules covering info, paths, operations, parameters, enums, servers, and tags
+- 42 built-in rules covering info, paths, operations, parameters, enums, servers, tags, and example validation
 - Text, JSON, and SARIF output formats
 - Non-zero exit code on violations — works natively in CI
 - Single static binary — no Node.js, no Docker, no package manager
